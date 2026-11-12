@@ -7,14 +7,20 @@ const startTime = performance.now();
 
 const logElement = document.getElementById("log");
 let msalInstance = null;
+const lines = [];
 
 function log(message, detail) {
     const elapsed = `${Math.round(performance.now() - startTime)}ms`.padStart(8);
     const suffix = detail === undefined ? "" : ` ${formatDetail(detail)}`;
     const line = `[${elapsed}] ${message}${suffix}`;
 
+    lines.push(line);
     console.log(`[PptWebAddinTest] ${line}`);
     logElement.textContent += `${line}\n`;
+}
+
+function dumpLog() {
+    console.log(`[PptWebAddinTest] Full log\n${lines.join("\n")}`);
 }
 
 function formatDetail(detail) {
@@ -82,7 +88,7 @@ async function signInAsync() {
 async function startAsync() {
     const settings = config.settings;
     document.getElementById("signIn").addEventListener("click", () => void signInAsync());
-    document.getElementById("clearLog").addEventListener("click", () => { logElement.textContent = ""; });
+    document.getElementById("clearLog").addEventListener("click", () => { logElement.textContent = ""; lines.length = 0; });
 
     log("Settings", settings);
 
@@ -102,6 +108,10 @@ async function startAsync() {
     }
 
     log("Startup complete");
+    dumpLog();
 }
 
-startAsync().catch((err) => log("Startup failed", err));
+startAsync().catch((err) => {
+    log("Startup failed", err);
+    dumpLog();
+});
