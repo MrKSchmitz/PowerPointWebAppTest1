@@ -1,0 +1,103 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.28",
+    "version": "1.0.0",
+    "id": "2725e1d7-a769-4e63-834b-b1e056f58080",
+    "developer": {
+        "name": "PowerPoint Web Add-in Test",
+        "websiteUrl": "https://localhost:3000",
+        "privacyUrl": "https://localhost:3000",
+        "termsOfUseUrl": "https://localhost:3000"
+    },
+    "name": {
+        "short": "PPT Web Test",
+        "full": "PowerPoint Web Add-in Test"
+    },
+    "description": {
+        "short": "Reproduces the PowerPoint on the web error dialog.",
+        "full": "Minimal task pane add-in that reproduces the PowerPoint on the web 'Sorry, we ran into a problem' dialog, with NAA on or off."
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "accentColor": "#C43E1C",
+    "validDomains": [
+        "localhost:3000"
+    ],
+    "extensions": [
+        {
+            "requirements": {
+                "scopes": [
+                    "presentation"
+                ]
+            },
+            "runtimes": [
+                {
+                    "id": "TaskPaneRuntime",
+                    "type": "general",
+                    "code": {
+                        "page": "https://localhost:3000/taskpane.html"
+                    },
+                    "lifetime": "short",
+                    "requirements": {
+                        "capabilities": [
+                            {
+                                "name": "AddinCommands",
+                                "minVersion": "1.1"
+                            }
+                        ]
+                    },
+                    "actions": [
+                        {
+                            "id": "ShowTaskPane",
+                            "type": "openPage",
+                            "pinnable": false,
+                            "view": "dashboard"
+                        }
+                    ]
+                }
+            ],
+            "ribbons": [
+                {
+                    "contexts": [
+                        "default"
+                    ],
+                    "tabs": [
+                        {
+                            "builtInTabId": "TabHome",
+                            "groups": [
+                                {
+                                    "id": "PptWebTestGroup",
+                                    "label": "PPT Web Test",
+                                    "icons": [
+                                        { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                                        { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                                        { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                                    ],
+                                    "controls": [
+                                        {
+                                            "id": "ShowTaskPaneButton",
+                                            "type": "button",
+                                            "label": "PPT Web Test",
+                                            "icons": [
+                                                { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                                                { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                                                { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                                            ],
+                                            "supertip": {
+                                                "title": "PPT Web Test",
+                                                "description": "Open the test task pane."
+                                            },
+                                            "actionId": "ShowTaskPane"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

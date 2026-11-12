@@ -1,0 +1,23 @@
+{
+  "name": "powerpoint-web-addin-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal PowerPoint task pane add-in that reproduces the PowerPoint on the web 'Sorry, we ran into a problem' dialog, with NAA on or off.",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "package": "node package.js",
+    "signin": "office-addin-dev-settings m365-account login",
+    "signout": "office-addin-dev-settings m365-account logout",
+    "sideload": "node package.js && npx -y -p @microsoft/m365agentstoolkit-cli atk install --file-path appPackage.zip --interactive false"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "4.30.0"
+  },
+  "devDependencies": {
+    "office-addin-dev-certs": "^2.0.6",
+    "office-addin-dev-settings": "^4.0.1",
+    "vite": "^7.1.0"
+  }
+}
